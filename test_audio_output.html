@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test HTML5 Audio Output</title>
+    <script type="text/javascript" src="audio_output.js"></script>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+      var phase = 0.0;
+      var freq;
+
+      function audioOutputStart(sampleRateHz)
+      {
+        freq = 2.0 * 997.0 / sampleRateHz;
+      }
+
+      function audioOutputRender(audioBuffer)
+      {
+        var length = audioBuffer.length;
+        for(var i=0; i<length; i++)
+        {
+          phase += freq;
+          if(phase > 1.0) phase -= 2.0;
+          audioBuffer[i] = phase * (1.0 - Math.abs(phase));
+        }
+      }
+
+      var audioOutput = new AudioOutput(audioOutputStart, audioOutputRender);
+
+    </script>
+  </body>
+</html>
