@@ -1,4 +1,4 @@
 test
 ====
 
-just a test for using github
+Currently just a test to see how github works
